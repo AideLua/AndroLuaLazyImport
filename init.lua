@@ -1,6 +1,6 @@
 appname="懒导入 lazyimport"
-appver="1.1"
-appcode="1199"
+appver="1.2"
+appcode="1299"
 appsdk="15"
 path_pattern=""
 packagename="com.jesse205.aidelua.lazyimport"

@@ -1,6 +1,7 @@
 local lazyimportCfg={}
-lazyimportCfg._VERSION="1.1"
-lazyimportCfg._VERSION_CODE=1199
+lazyimportCfg._VERSION="1.2"
+lazyimportCfg._VERSION_CODE=1299
+lazyimportCfg._DESCRIPTION="Lazy import"
 rawset(_G,"lazyimportCfg",lazyimportCfg)
 require "import"
 local _import=_G["import"]
@@ -15,8 +16,10 @@ local metatable={
         return value
       end
     end
-    local lazyImportCfg=lazyImportMap[key]
-    _import(lazyImportCfg[1],lazyImportCfg[2])
+    local cfg=lazyImportMap[key]
+    if cfg then
+      _import(cfg[1],cfg[2])
+    end
     return rawget(_G,key)
   end
 }
@@ -25,7 +28,7 @@ setmetatable(_G,metatable)
 local function lazyimport(package,env,callName)
   callName = callName or package:match('([^%.$]+)$')
   if not lazyImportMap[callName] then
-  lazyImportMap[callName]={package,env}
+    lazyImportMap[callName]={package,env}
   end
 end
 
