@@ -17,3 +17,15 @@ lazyimport "java.io.File"
 print("已懒加载testFile")
 print("testFile.hello:",testFile.hello)
 print("File:",File)
+
+local t=System.currentTimeMillis()
+for index=1,100000 do
+  lazyimport "java.io.File"
+end
+print("懒导入 100000 次耗时:",System.currentTimeMillis()-t)
+
+local t=System.currentTimeMillis()
+for index=1,100000 do
+  lazyimport("java.io.File",nil,"File")
+end
+print("懒导入（指定类名） 100000 次耗时:",System.currentTimeMillis()-t)
